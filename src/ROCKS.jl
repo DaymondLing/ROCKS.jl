@@ -1,6 +1,6 @@
 module ROCKS
 
-using LinearAlgebra
+#using LinearAlgebra
 using FreqTables
 using NamedArrays
 
@@ -9,20 +9,20 @@ using Reexport
 @reexport using DataFrames
 @reexport using Plots
 
-export BCDiag, bcdiag
-export biasplot, ksplot, rocplot, accuracyplot
+export ranks                # equal count binning
+export kstest               # two sample KS and location
+export concordance          # Concordance with bounds function
+export roc                  # ssynonym for Concordance
+
+export BCDiag
+export bcdiag
+export ksplot, rocplot, biasplot, accuracyplot
 export liftcurve, cumliftcurve
 export liftable, cumliftable
-export kstest               # two sample KS and location
-export auroc                # concordance and AUROC
-export concordance          # Concordance with bounds function
-export ranks                # equal count binning
 
-#export infovalue
-
-include("roc.jl")
-include("kstest.jl")
 include("ranks.jl")
+include("kstest.jl")
+include("roc.jl")
 include("bcdiag.jl")
 
 end # module

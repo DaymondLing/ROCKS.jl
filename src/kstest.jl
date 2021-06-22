@@ -11,8 +11,8 @@ Returns:
 - baserate, incidence rate of class 1
 - ks, the maximum separation between the two cumulative distributions
 - ksarg, the value of `var` at which maximum separation is achieved
-- ksdep, depth of ksarg in the sorted values of `var`;
-`rev` = true counts depth from high value towards low value.
+- ksdep, depth of ksarg in the sorted values of `var`
+`rev` = true counts depth from high value towards low value
 """
 function kstest(class::BitArray{1}, var::Vector; rev = true)
     n = length(class)
@@ -36,8 +36,8 @@ function kstest(class::BitArray{1}, var::Vector; rev = true)
 end
 
 function kstest(class::Vector, var::Vector; rev = true)
-    uc = unique(class)
-    length(uc) == 2 || error(ArgumentError("class should have 2 levels"))
+    uc = sort!(unique(class))
+    length(uc) == 2 || error(ArgumentError("class must be 2 levels"))
 
     kstest(class .== uc[2], var; rev = rev)
 end
