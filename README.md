@@ -1,8 +1,8 @@
 # ROCKS.jl
 
-A set of functions for ROC, KS, Concordance, lift curves of Binary Classifier.
-Designed for adequate performance on large datasets, lets industry practitioners
-get to the performance metrics quickly.
+`ROCKS` is a set of functions for ROC, Concordance, KS, lift curves and tables of a Binary Classifier.
+They are designed to let industry practitioners easily understand the performance characteristics
+of a binary classifier with adequate speed on large datasets.
 
 [![Stable](https://img.shields.io/badge/docs-stable-blue.svg)](https://DaymondLing.github.io/ROCKS.jl/stable)
 [![Dev](https://img.shields.io/badge/docs-dev-blue.svg)](https://DaymondLing.github.io/ROCKS.jl/dev)
@@ -17,20 +17,18 @@ This package is installable via its URL:
 ] add https://github.com/DaymondLing/ROCKS.jl
 ```
 
-## Purpose
+## Functionalities
 
-The purpose of ROCKS.jl is to make it easy for industry practitioners to evaluate
-the performance of a binary classifier.
-It provides the following capabilities:
+`ROCKS` provides the following capabilities:
+
+Area under Receiver Operating Characteristics:
+- `roc`, Area Under Receiver Operating Characteristics curve via
+    concordance calculation, same results but more informative than numeric integration
 
 Kolmogoriv-Smirnov statistic:
 - `kstest`, 2 sample Kolmogorov-Smirnov point estimate and location
 
-Area under Receiver Operating Characteristic:
-- `auroc`, Area Under Receiver Operatin Characteristics curve via
-    concordance calculation rather than numeric integration
-
-Binary Classifier performance plots: 
+Binary Classifier performance plots:
 - `bcdiag`, wrapper for `kstest` and `auroc` that facilitates plotting
     the graphs below
 - `ksplot`, plot of Kolmogorov-Smirnov separation
@@ -41,8 +39,3 @@ Binary Classifier performance plots:
 - `cumliftcurve`, cumulative actual and predicted lift curves
 - `liftable`, actual and predicted lift tables
 - `cumliftable`, cumulative actual and predicted lift tables
-
-## Project Status
-
-This is work in progress, development is against the more recent versions of
-Julia, e.g., 1.4 and up.

@@ -1,58 +1,36 @@
-# DSUtils.jl
+# ROCKS.jl
 
-The intent of DSUtils is to make it easy for industry practitioners to
-get their work done.
-It provides functions for some routine parts of data science workflow
-so that people can focus on problem solving and not break their train
-of thought.
-The functions should just work and be reasonably performant
-on millions of rows of data.
-
-There are no new capabilities per se, indeed, many of the functionalities
-are available in other packages.
-It is an end user package for people to get their analysis done rather than
-a package for others to build packages with.
+`ROCKS` is a set of functions for ROC, Concordance, KS, lift curves and tables of a Binary Classifier.
+They are designed to let industry practitioners easily understand the performance characteristics
+of a binary classifier with adequate speed on large datasets.
 
 ## Installation
 
-This package is not registered in Julia's general registry yet.
-You can add it via its URL:
+This package is installable via its URL:
 
 ```
-] add https://github.com/DaymondLing/DSUtils.jl
+] add https://github.com/DaymondLing/ROCKS.jl
 ```
 
-## Current capabilities
+## Functionalities
 
-- Binary classifier performance evaluation
-    - `kstest`, 2 sample Kolmogorov-Smirnov separation point estimate and location
-    - `auroc`, Area Under Receiver Operating Characteristics curve via
-        concordance calculation rather than numeric integration
-    - `bcdiag`, wrapper for `kstest` and `auroc` that facilitates
-        plotting the graphs and generating tables below
-    - `ksplot`, plot of Kolmogorov-Smirnov 2 sample CDF separation
-    - `rocplot`, ROC plot
-    - `biasplot`, plot of actual response rate vs. predicted probability
-    - `accuracyplot`, plot of accuracy given utility values for [TP, FN, FP, TN]
-    - `liftcurve`, actual and predicted lift curves
-    - `cumliftcurve`, cumulative actual and predicted lift curves
-    - `liftable`, actual and predicted lift tables
-    - `cumliftable`, cumulative actual and predicted lift tables
-    - `infovalue`, change in two frequency distributions
+`ROCKS` provides the following capabilities:
 
-- Binning
-    - `ranks`, equal density binning, tied values are always in the same bin
+Area under Receiver Operating Characteristics:
+- `roc`, Area Under Receiver Operating Characteristics curve via
+    concordance calculation, same results but more informative than numeric integration
 
-- Dummy encoding
-    - `onehot!`, one hot encode a categorical variable, works with missing level
-        and missing data, output indicator variables are in a DataFrame
-        with named columns
+Kolmogoriv-Smirnov statistic:
+- `kstest`, 2 sample Kolmogorov-Smirnov point estimate and location
 
-- Missing computation
-    - `sumxm`, sum a collection of scalars or vectors (element-wise) treating missing as 0
-
-## Project Status
-
-This is work in progress, development is done on Julia 1.5 although there's
-nothing special about the code that would prevent it from working on older
-versions of Julia.
+Binary Classifier performance plots:
+- `bcdiag`, wrapper for `kstest` and `auroc` that facilitates plotting
+    the graphs below
+- `ksplot`, plot of Kolmogorov-Smirnov separation
+- `rocplot`, ROC plot
+- `biasplot`, plot of actual response rate vs. predicted probability
+- `accuracyplot`, plot of model accuracy given utility values for [TP, FN, FP, TN]
+- `liftcurve`, actual and predicted lift curves
+- `cumliftcurve`, cumulative actual and predicted lift curves
+- `liftable`, actual and predicted lift tables
+- `cumliftable`, cumulative actual and predicted lift tables

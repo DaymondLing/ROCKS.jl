@@ -1,10 +1,10 @@
 ```@meta
-CurrentModule = DSUtils
+CurrentModule = ROCKS
 ```
 
 ```@index
 ```
 
 ```@autodocs
-Modules = [DSUtils]
+Modules = [ROCKS]
 ```
