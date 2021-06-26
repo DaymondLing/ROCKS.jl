@@ -1,5 +1,4 @@
 using ROCKS
-
 using Random
 using Distributions
 
@@ -9,23 +8,29 @@ const logit = -3.0 .+ 0.5 .* x .+ rand(Normal(0, 0.1), length(x))
 const prob = @. 1.0 / (1.0 + exp(-logit))
 const target = rand(length(x)) .<= prob
 
-kk = kstest(target, x)
+kk = kstest(target, prob)
 
-cc = concordance(target, x)
+cc = concordance(target, prob)
 
-perf = bcdiag(target, x)
+perf = bcdiag(target, prob)
 
-ksplot(perf)
+kp = ksplot(perf)
+png(kp, "ksplot.png")
 
-rocplot(perf)
+rp = rocplot(perf)
+png(rp, "rocplot.png")
 
-biasplot(perf)
+bp = biasplot(perf)
+png(bp, "biasplot.png")
 
-accuracyplot(perf)
+ap = accuracyplot(perf)
+png(ap, "accuracyplot.png")
 
-liftcurve(perf)
+lp = liftcurve(perf)
+png(lp, "liftcurve.png")
 
-cumliftcurve(perf)
+clp = cumliftcurve(perf)
+png(clp, "cumliftcurve.png")
 
 liftable(perf)
 
