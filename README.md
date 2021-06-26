@@ -36,7 +36,7 @@ of area under the ROC curve, is more generally useful beyond ROC.
 Kolmogorov-Smirnov statistic:
 - `kstest`, 2 sample Kolmogorov-Smirnov separation and location estimate
 
-Plots and Tables:
+Plots:
 - `bcdiag`, wrapper for `kstest` and `roc` that facilitates using the functions below
 - `ksplot`, plot of Kolmogorov-Smirnov separation
 - `rocplot`, ROC plot
@@ -44,13 +44,19 @@ Plots and Tables:
 - `accuracyplot`, plot of model accuracy given utility values for [TP, FN, FP, TN]
 - `liftcurve`, actual and predicted lift curves
 - `cumliftcurve`, cumulative actual and predicted lift curves
+
+The returned plot objects can be modified as necessary.
+
+Tables:
 - `liftable`, actual and predicted lift tables
 - `cumliftable`, cumulative actual and predicted lift tables
+
+DataFrame tables are returned and can be further processed as desired.
 
 ## Requirements
 
 The core of this package is straight forward Julia code which should run
-on Julia versions 1.5 or higher, 
+on Julia versions 1.5 or higher. 
 It uses `StatsBase` and `FreqTables` for computations,
 `Plots` is used for plotting,
 and `DataFrames` is used to store/print output tables.

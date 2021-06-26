@@ -5,9 +5,11 @@ a binary classifier are:
 - C-Statistic (concordance statistic) or Area Under Curve or just ROC
 (Receiver Operating Characteristic)
 
-![ROCPlot](../figs/rocplot.png)
+<img src="../figs/rocplot.png"/>
 
 - KS-Statistic (Kolmogorov-Smirnov 2 sample CDF max separation)
+
+<img src="../figs/ksplot.png"/>
 
 ![KSPlot](../figs/ksplot.png)
 
