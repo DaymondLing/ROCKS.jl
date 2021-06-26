@@ -3,20 +3,20 @@
 Two of the commonly used metrics to evaluate the performance of
 a binary classifier are:
 
-- C-Statistic (concordance statistic) or Area Under Curve or just ROC
+- C-statistic (concordance statistic) or Area Under Curve or just ROC 
 (Receiver Operating Characteristic)
 
 ```@raw html
 <img src="../figs/rocplot.png"/>
 ```
 
-![ROCPlot](figs/rocplot.png)
+![ROCPlot](figs/rocplot.png =400x400)
 
 
 - KS-Statistic (Kolmogorov-Smirnov 2 sample CDF max separation)
 
 ```@raw html
-<img src="../figs/ksplot.png"/>
+<img src="../figs/ksplot.png =300x300"/>
 ```
 
 ![KSPlot](figs/ksplot.png)
