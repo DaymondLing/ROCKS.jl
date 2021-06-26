@@ -14,10 +14,17 @@ ROC and KS for large problems, e.g., millions of rows,
 and produce graphs and tables as model performance documentation.
 
 ![ROCPlot](docs/src/images/rocplot.png)
-![ROCPlot](docs/src/images/rocplot.png =400x400)
 
 ![KSPlot](docs/src/images/ksplot.png)
-![KSPlot](docs/src/images/ksplot.png =400x400)
+
+```@raw html
+<img src="docs/src/images/ksplot.png"/>
+```
+
+```@raw html
+<img src="docs/src/images/ksplot.png"/ width="400" height="400" />
+```
+
 
 ## Installation
 
