@@ -13,9 +13,9 @@ The functions in this package makes it easy to calculate
 ROC and KS for large problems, e.g., millions of rows,
 and produce graphs and tables as model performance documentation.
 
-![KSPlot](../figs/ksplot.png)
+![KSPlot](docs/src/figs/ksplot.png)
 
-![ROCPlot](../figs/rocplot.png)
+![ROCPlot](docs/src/figs/rocplot.png)
 
 ## Installation
 
