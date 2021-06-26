@@ -12,11 +12,11 @@ makedocs(;
         assets = String[],
     ),
     pages = Any[
-        "Home"=>"index.md",
-        "Manual"=>Any[
-            "Binary Classifier"=>"man/bcdiag.md",
+        "Home" => "index.md",
+        "Manual" => Any[
+            "Binary Classifier" => "man/bcdiag.md",
         ],
-        "Function Reference"=>"Reference.md",
+        "Function Reference" => "Reference.md",
     ],
 )
 

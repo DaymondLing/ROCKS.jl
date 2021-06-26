@@ -1,6 +1,6 @@
 module ROCKS
 
-#using LinearAlgebra
+using LinearAlgebra
 using FreqTables
 using NamedArrays
 
