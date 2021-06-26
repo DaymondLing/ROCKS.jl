@@ -1,5 +1,5 @@
 """
-    concordance(class::BitVector, var::Vector; tie=1e-6)
+    concordance(class::BitVector, var::Vector, tie=1e-6)
 
 Concordance calculation:
 `class` is a 2 level categorical target variable,
@@ -25,7 +25,7 @@ Note:
 - Goodman-Kruskal Gamma is (Concordant - Discordant) / (Concordant + Discordant)
 - Kendall's Tau is (Concordant - Discordant) / (0.5 x Total count x (Total count - 1))
 """
-function concordance(class::BitVector, var::Vector; tie = 1e-6)
+function concordance(class::BitVector, var::Vector, tie = 1e-6)
     n = length(class)
     n == length(var) || throw(ArgumentError("class and var should be the same length"))
     n1 = sum(class)
@@ -65,11 +65,64 @@ function concordance(class::BitVector, var::Vector; tie = 1e-6)
     (conc = conc, tied = tied, disc = disc, auc = auc, gini = 2auc - 1)
 end
 
-function concordance(class::Vector, var::Vector; tie = 1e-6)
+function concordance(class::Vector, var::Vector, tie = 1e-6)
     uc = sort!(unique(class))
     length(uc) == 2 || throw(ArgumentError("class must be 2 levels"))
 
-    concordance(class .== uc[2], var; tie = tie)
+    concordance(class .== uc[2], var, tie)
+end
+
+"""
+    concordance(class::BitVector, var::Vector, tie::Function)
+
+Concordance calculation with a function to define tied region.
+More generally flexible when comparing, e.g., income of two groups, where
+the tied region is not constant but is a percentage of the income for instance.
+"""
+function concordance(class::BitVector, var::Vector, tie::Function)
+    n = length(class)
+    n == length(var) || throw(ArgumentError("class and var should be the same length"))
+    n1 = sum(class)
+    n1 == 0 && throw(ArgumentError("there are no class 1"))
+    n0 = n - n1
+    n0 == 0 && throw(ArgumentError("there are no class 0"))
+
+    c1 = sort!(var[class])              # sorted var of class 1
+    c0 = sort!(var[.!class])            # sorted var of class 0
+
+    conc = 0
+    tied = 0
+    l_ix = 1
+    u_ix = 1
+    @inbounds for v in c1               # loop over this usually smaller array
+        l_v, u_v = tie(v)               # tie scalar function returning lower & upper bound
+
+        while l_ix <= n0                # first index within [l_v, u_v] window
+            l_v <= c0[l_ix] && break
+            l_ix += 1                   # could exit as n0 + 1
+        end
+
+        while u_ix <= n0                # first index beyond [l_v, u_v] window
+            u_v < c0[u_ix] && break
+            u_ix += 1                   # could exit as n0 + 1
+        end
+
+        conc += (l_ix - 1)              # lower than l_ix are Concordant
+        tied += (u_ix - l_ix)           # within window are tied
+    end
+
+    pairs = n1 * n0
+    disc = pairs - conc - tied
+    auc = (conc + 0.5tied) / pairs
+
+    (conc = conc, tied = tied, disc = disc, auc = auc, gini = 2auc - 1)
+end
+
+function concordance(class::Vector, var::Vector, tie::Function)
+    uc = sort!(unique(class))
+    length(uc) == 2 || throw(ArgumentError("class must be 2 levels"))
+
+    concordance(class .== uc[2], var, tie)
 end
 
 roc = concordance                       # synonym

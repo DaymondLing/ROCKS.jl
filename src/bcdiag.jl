@@ -47,10 +47,10 @@ function Base.show(io::IO, ::MIME"text/plain", x::BCDiag)
         "\nks:        ", round(x.ks, digits=4),
         "   occurs at value of ", x.ksarg,
         " depth of ", x.ksdep,
-        "\nauroc:     ", round(x.auc, digits=4),
-        "   concordant: ", x.concordant,
-        "   tied: ", x.tied,
-        "   discordant: ", x.discordant,
+        "\nroc:       ", round(x.auc, digits=4),
+        "   concordant pairs: ", x.concordant,
+        "   tied pairs: ", x.tied,
+        "   discordant pairs: ", x.discordant,
         "\nGini:      ", round(x.gini, digits=4),
     )
 end
@@ -80,7 +80,7 @@ Returns a BCDiag struct which can be used for plotting or printing:
 """
 function bcdiag(target::BitVector, pred::Vector; groups=100, rev=true, tie=1e-6)
     ks = kstest(target, pred; rev=rev)
-    roc = auroc(target, pred; tie=tie)
+    auroc = concordance(target, pred, tie)
 
     grpid = ranks(pred, groups=groups, rev=rev)
     frqtbl = freqtable(grpid, target)
@@ -115,7 +115,7 @@ function bcdiag(target::BitVector, pred::Vector; groups=100, rev=true, tie=1e-6)
 
     BCDiag(
         ks...,
-        roc...,
+        auroc...,
         grp, depth, cdf1, cdf0,
         cntg, cnt1, prd1, rrObs, rrPrd,
         cumg, cum1, cpr1, crObs, crPrd,
@@ -335,6 +335,7 @@ function liftcurve(x::BCDiag)
     plt = Plots.plot(
         size=(500, 500),
         xlims=(0.0, 1.0),
+        ylims=(0.0, Inf), widen=true,
         legend=:topright,
         xguidefontsize=10,
         yguidefontsize=10,
@@ -344,7 +345,7 @@ function liftcurve(x::BCDiag)
     xlabel!("Depth", xguidefontsize=10)
     ylabel!("Response Rate", yguidefontsize=10)
 
-    plot!(x.depth, x.rrObs, label="Actual", width=0.5, linestyle=:dash)
+    plot!(x.depth, x.rrObs, label="Actual", width=1.0, seriescolor=:red)
     plot!(x.depth, x.rrPrd, label="Predicted", width=1.5, seriescolor=:blue)
     hline!([x.baserate], label="Base rate", linestyle=:dash)
 
@@ -361,18 +362,19 @@ function cumliftcurve(x::BCDiag)
     plt = Plots.plot(
         size=(500, 500),
         xlims=(0.0, 1.0),
+        ylims=(0.0, Inf), widen=true,
         legend=:topright,
         xguidefontsize=10,
         yguidefontsize=10,
         titlefontsize=11,
-    )
-    title!("Cumulative Lift Curve", titlefontsize=11)
-    xlabel!("Depth", xguidefontsize=10)
-    ylabel!("Response Rate", yguidefontsize=10)
+        )
+        title!("Cumulative Lift Curve", titlefontsize=11)
+        xlabel!("Depth", xguidefontsize=10)
+        ylabel!("Response Rate", yguidefontsize=10)
 
-    plot!(x.depth, x.crObs, label="Actual", width=0.5, linestyle=:dash)
-    plot!(x.depth, x.crPrd, label="Predicted", width=1.5, seriescolor=:blue)
-    hline!([x.baserate], label="Base rate", linestyle=:dash)
+        plot!(x.depth, x.crObs, label="Actual", width=1.0, seriescolor=:red)
+        plot!(x.depth, x.crPrd, label="Predicted", width=1.5, seriescolor=:blue)
+        hline!([x.baserate], label="Base rate", linestyle=:dash)
 
     plt
 end
