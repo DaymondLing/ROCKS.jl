@@ -335,6 +335,7 @@ function liftcurve(x::BCDiag)
     plt = Plots.plot(
         size=(500, 500),
         xlims=(0.0, 1.0),
+        ylims=(0.0, Inf), widen=true,
         legend=:topright,
         xguidefontsize=10,
         yguidefontsize=10,
@@ -344,7 +345,7 @@ function liftcurve(x::BCDiag)
     xlabel!("Depth", xguidefontsize=10)
     ylabel!("Response Rate", yguidefontsize=10)
 
-    plot!(x.depth, x.rrObs, label="Actual", width=0.5, linestyle=:dash)
+    plot!(x.depth, x.rrObs, label="Actual", width=1.0, seriescolor=:red)
     plot!(x.depth, x.rrPrd, label="Predicted", width=1.5, seriescolor=:blue)
     hline!([x.baserate], label="Base rate", linestyle=:dash)
 
@@ -361,18 +362,19 @@ function cumliftcurve(x::BCDiag)
     plt = Plots.plot(
         size=(500, 500),
         xlims=(0.0, 1.0),
+        ylims=(0.0, Inf), widen=true,
         legend=:topright,
         xguidefontsize=10,
         yguidefontsize=10,
         titlefontsize=11,
-    )
-    title!("Cumulative Lift Curve", titlefontsize=11)
-    xlabel!("Depth", xguidefontsize=10)
-    ylabel!("Response Rate", yguidefontsize=10)
+        )
+        title!("Cumulative Lift Curve", titlefontsize=11)
+        xlabel!("Depth", xguidefontsize=10)
+        ylabel!("Response Rate", yguidefontsize=10)
 
-    plot!(x.depth, x.crObs, label="Actual", width=0.5, linestyle=:dash)
-    plot!(x.depth, x.crPrd, label="Predicted", width=1.5, seriescolor=:blue)
-    hline!([x.baserate], label="Base rate", linestyle=:dash)
+        plot!(x.depth, x.crObs, label="Actual", width=1.0, seriescolor=:red)
+        plot!(x.depth, x.crPrd, label="Predicted", width=1.5, seriescolor=:blue)
+        hline!([x.baserate], label="Base rate", linestyle=:dash)
 
     plt
 end
