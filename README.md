@@ -13,9 +13,9 @@ The functions in this package makes it easy to calculate
 ROC and KS for large problems, e.g., millions of rows,
 and produce graphs and tables as model performance documentation.
 
-![KSPlot](docs/src/figs/ksplot.png)
-
 ![ROCPlot](docs/src/figs/rocplot.png)
+
+![KSPlot](docs/src/figs/ksplot.png)
 
 ## Installation
 
@@ -46,3 +46,11 @@ Plots and Tables:
 - `cumliftcurve`, cumulative actual and predicted lift curves
 - `liftable`, actual and predicted lift tables
 - `cumliftable`, cumulative actual and predicted lift tables
+
+## Requirements
+
+The core of this package is straight forward Julia code which should run
+on Julia versions 1.5 or higher, 
+It uses `StatsBase` and `FreqTables` for computations,
+`Plots` is used for plotting,
+and `DataFrames` is used to store/print output tables.

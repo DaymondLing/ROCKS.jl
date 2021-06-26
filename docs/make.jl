@@ -11,9 +11,9 @@ makedocs(;
         canonical = "https://DaymondLing.github.io/ROCKS.jl/stable",
         assets = String[],
     ),
-    pages = Any[
+    pages = [
         "Home" => "index.md",
-        "Manual" => Any[
+        "User's Guide" => [
             "Binary Classifier" => "man/bcdiag.md",
         ],
         "Function Reference" => "Reference.md",
