@@ -22,7 +22,7 @@ and produce graphs and tables as model performance documentation.
 ```
 
 ```@raw html
-<img src="docs/src/images/ksplot.png"/ width="400" height="400" />
+<img src="../docs/src/images/ksplot.png"/ width="400" height="400" />
 ```
 
 

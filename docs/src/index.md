@@ -7,7 +7,7 @@ a binary classifier are:
 (Receiver Operating Characteristic)
 
 ```@raw html
-<img src="../images/rocplot.png"/>
+<img src="images/rocplot.png"/>
 ```
 
 ![ROCPlot](images/rocplot.png)
