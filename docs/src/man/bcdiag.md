@@ -46,7 +46,7 @@ the values, this is the typical data structure of model scoring on
 development or validation data.
 
 ```@example kstest
-using DSUtils
+using ROCKS
 
 cls = [fill(0, length(n100)); fill(1, length(n100a))]
 values = [n100; n100a]
@@ -107,7 +107,7 @@ ks is now quite high at 0.949.
 These examples illustrate how `ks` can serve as an indicator of the ability to
 separate the two classes.
 
-## auroc
+## ROC
 
 A good binary classifier would have high sensitivity
 (able to recognize True Positive) and high specificity
@@ -149,10 +149,10 @@ and
 ```@example kstest
 cls = [fill(0, length(n100)); fill(1, length(n140))]
 values = [n100; n140]
-auroc(cls, values)
+roc(cls, values)
 ```
 
-`auroc` returns results in a named tuple:
+`roc` returns results in a named tuple:
 
 - `conc`, number of concordant comparisons
 - `tied`, number of tied comparisons
@@ -162,15 +162,16 @@ auroc(cls, values)
 
 ## bcdiag
 
-While `kstest` and `auroc` provide diagnostic measures for comparing
+While `kstest` and `roc` provide diagnostic measures for comparing
 model performance, when there is a model of interest,
 it is likely that we need to produce many graphs and table to understand and
 document its performance, `bcdiag` allows us to do this easily.
 
 ```@example bcd
+using ROCKS
 using Random
 using GLM
-using DSUtils
+using DataFrames
 
 function logitgen(intercept::Real, slope::Real, len::Int; seed = 888)
     Random.seed!(seed)
@@ -182,7 +183,9 @@ function logitgen(intercept::Real, slope::Real, len::Int; seed = 888)
     y, x
 end
 
-m = DataFrame(logitgen(-3, 0.6, 100_000), (:target, :x))
+y, x = logitgen(-3, 0.6, 100_000)
+
+m = DataFrame(target=y, x=x)
 m_logistic = glm(@formula(target ~ x), m, Binomial(), LogitLink())
 m.pred = predict(m_logistic)
 
@@ -190,7 +193,7 @@ kstest(m.target, m.pred)
 ```
 
 ```@example bcd
-auroc(m.target, m.pred)
+roc(m.target, m.pred)
 ```
 
 Running `bcdiag` prints a quick summary:
