@@ -10,6 +10,9 @@ a binary classifier are:
 <img src="../figs/rocplot.png"/>
 ```
 
+![ROCPlot](figs/rocplot.png)
+
+
 - KS-Statistic (Kolmogorov-Smirnov 2 sample CDF max separation)
 
 ```@raw html
