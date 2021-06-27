@@ -19,21 +19,17 @@ These work:
 
 ![KSPlot](docs/src/images/ksplot.png)
 
+<img src="docs/src/images/ksplot.png" />
+
+<img src="docs/src/images/ksplot.png" width="400" />
+
 Try html tags:
 
 <img src="../../docs/src/images/ksplot.png" />
 <img src="../docs/src/images/ksplot.png" />
-<img src="docs/src/images/ksplot.png" />
+<img src="docs/src/images/ksplot.png" width="400" />
 <img src="src/images/ksplot.png" />
 <img src="images/ksplot.png" />
-
-```@raw html
-<img src="../../docs/src/images/ksplot.png" />
-<img src="../docs/src/images/ksplot.png" />
-<img src="docs/src/images/ksplot.png" />
-<img src="src/images/ksplot.png" />
-<img src="images/ksplot.png" />
-```
 
 
 ## Installation
