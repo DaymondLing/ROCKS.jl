@@ -21,6 +21,14 @@ and produce graphs and tables as model performance documentation.
 
 <img src="docs/src/images/ksplot.png" width="400" />
 
+### biasplot
+
+<img src="docs/src/images/biasplot.png" width="400" />
+
+### liftcurve
+
+<img src="docs/src/images/liftcurve.png" width="400" />
+
 ## Installation
 
 This package is installable via its URL:
