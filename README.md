@@ -49,15 +49,12 @@ Kolmogorov-Smirnov statistic:
 - `kstest`, 2 sample Kolmogorov-Smirnov separation and location estimate
 
 Plots:
+
 - `bcdiag`, wrapper for `kstest` and `roc` that facilitates using the functions below
+
 - `ksplot`, plot of Kolmogorov-Smirnov separation
 - `rocplot`, ROC plot
-
-<img src="docs/src/images/rocplot.png" width="400" />
-
 - `biasplot`, plot of actual response rate vs. predicted probability
-
-
 - `accuracyplot`, plot of model accuracy given utility values for [TP, FN, FP, TN]
 - `liftcurve`, actual and predicted lift curves
 - `cumliftcurve`, cumulative actual and predicted lift curves
@@ -65,7 +62,9 @@ Plots:
 The returned plot objects can be modified as necessary.
 
 Tables:
+
 - `liftable`, actual and predicted lift tables
+
 - `cumliftable`, cumulative actual and predicted lift tables
 
 DataFrame tables are returned and can be further processed as desired.
