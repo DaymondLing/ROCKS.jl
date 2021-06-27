@@ -9,9 +9,9 @@ and KS (Kolmogorov-Smirnov Statistic).
 
 Whether building a binary classifier or auditing one built by someone else,
 there are many things we'd like to know about its performance characteristics.
-The functions in this package make it easy to calculate
+This package makes it easy to calculate
 ROC and KS for large problems, e.g., millions of rows,
-and produce graphs and tables as model performance documentation.
+and produce graphs and tables for model performance documentation.
 
 ### rocplot
 
@@ -52,7 +52,12 @@ Plots:
 - `bcdiag`, wrapper for `kstest` and `roc` that facilitates using the functions below
 - `ksplot`, plot of Kolmogorov-Smirnov separation
 - `rocplot`, ROC plot
+
+<img src="docs/src/images/rocplot.png" width="400" />
+
 - `biasplot`, plot of actual response rate vs. predicted probability
+
+
 - `accuracyplot`, plot of model accuracy given utility values for [TP, FN, FP, TN]
 - `liftcurve`, actual and predicted lift curves
 - `cumliftcurve`, cumulative actual and predicted lift curves
