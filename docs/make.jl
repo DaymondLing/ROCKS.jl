@@ -14,7 +14,9 @@ makedocs(;
     pages = [
         "Home" => "index.md",
         "User's Guide" => [
-            "Binary Classifier" => "man/bcdiag.md",
+            "KS Test" => "man/kstest.md",
+            "ROC" => "man/roc.md",
+            "Plots" => "man/bcdiag.md",
         ],
         "Function Reference" => "Reference.md",
     ],
