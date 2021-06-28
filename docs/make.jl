@@ -13,7 +13,6 @@ makedocs(;
     ),
     pages = [
         "Home" => "index.md",
-        "KS Test" => "kstest.md",
         "User's Guide" => [
             "KS Test" => "man/kstest.md",
             "ROC" => "man/roc.md",
