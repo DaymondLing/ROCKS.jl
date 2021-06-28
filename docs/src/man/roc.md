@@ -1,6 +1,6 @@
 # ROC
 
-A good binary classifier would have high sensitivity
+A good binary classifier should have high sensitivity
 (able to recognize True Positive) and high specificity
 (able to recognize True Negatives, hence have low False Positive).
 A plot of the trade-off curve of True Positive Rate versus False Positive Rate

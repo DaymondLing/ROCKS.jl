@@ -8,36 +8,32 @@ document its performance, `bcdiag` allows us to do this easily.
 ```@example bcd
 using ROCKS
 using Random
-using GLM
-using DataFrames
+using Distributions
 
-function logitgen(intercept::Real, slope::Real, len::Int; seed = 888)
-    Random.seed!(seed)
-    x = 10 .* rand(len)                     # random uniform [0, 10)
-    # sort!(x)                                # x ascending
-    logit = @. intercept + slope * x        # logit(prob) = ln(p / (1 + p)) = linear equation
-    prob = @. 1. / (1. + exp(-logit))       # probability
-    y = rand(len) .<= prob
-    y, x
-end
-
-y, x = logitgen(-3, 0.6, 100_000)
-
-m = DataFrame(target=y, x=x)
-m_logistic = glm(@formula(target ~ x), m, Binomial(), LogitLink())
-m.pred = predict(m_logistic)
-
-kstest(m.target, m.pred)
+Random.seed!(888)
+const x = rand(Uniform(-5, 5), 1_000_000)
+const logit = -3.0 .+ 0.5 .* x .+ rand(Normal(0, 0.1), length(x))
+const prob = @. 1.0 / (1.0 + exp(-logit))
+const target = rand(length(x)) .<= prob
 ```
+
+`kstest`:
 
 ```@example bcd
-roc(m.target, m.pred)
+kstest(target, prob)
 ```
+
+`roc`:
+```@example bcd
+roc(target, prob)
+```
+
+## bcdiag
 
 Running `bcdiag` prints a quick summary:
 
 ```@example bcd
-mdiag = bcdiag(m.target, m.pred)
+mdiag = bcdiag(target, prob)
 ```
 
 The output structure allows us to create the following plots and tables to understand:

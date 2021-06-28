@@ -4,30 +4,30 @@
 [![Build Status](https://github.com/DaymondLing/ROCKS.jl/workflows/CI/badge.svg)](https://github.com/DaymondLing/ROCKS.jl/actions)
 [![Coverage](https://codecov.io/gh/DaymondLing/ROCKS.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/DaymondLing/ROCKS.jl)
 
-`ROCKS` stands for ROC (C-statistic, Receiver Operating Characteristic)
+`ROCKS` stands for ROC (Concordance-statistic, Receiver Operating Characteristic)
 and KS (Kolmogorov-Smirnov Statistic).
 
 Whether building a binary classifier or auditing one built by someone else,
-there are many things we'd like to know about its performance characteristics.
+there are many things we'd like to know about its performance.
 This package makes it easy to calculate
-ROC and KS for large problems, e.g., millions of rows,
+ROC and KS for large problems (millions of rows) quickly,
 and produce graphs and tables for model performance documentation.
 
 ### rocplot
 
-<img src="docs/src/images/rocplot.png" width="400" />
+<img src="docs/src/images/rocplot.png" width="500" />
 
 ### ksplot
 
-<img src="docs/src/images/ksplot.png" width="400" />
+<img src="docs/src/images/ksplot.png" width="500" />
 
 ### biasplot
 
-<img src="docs/src/images/biasplot.png" width="400" />
+<img src="docs/src/images/biasplot.png" width="500" />
 
 ### liftcurve
 
-<img src="docs/src/images/liftcurve.png" width="400" />
+<img src="docs/src/images/liftcurve.png" width="500" />
 
 ## Installation
 
@@ -36,6 +36,12 @@ This package is installable via its URL:
 ```
 ] add https://github.com/DaymondLing/ROCKS.jl
 ```
+
+The core of this package is straight forward Julia code which should run
+on Julia versions 1.5 or higher. 
+It uses `StatsBase` and `FreqTables` for computations,
+`Plots` is used for plotting,
+and `DataFrames` is used to store/print output tables.
 
 ## Functionalities
 
@@ -68,11 +74,3 @@ Tables:
 - `cumliftable`, cumulative actual and predicted lift tables
 
 DataFrame tables are returned and can be further processed as desired.
-
-## Requirements
-
-The core of this package is straight forward Julia code which should run
-on Julia versions 1.5 or higher. 
-It uses `StatsBase` and `FreqTables` for computations,
-`Plots` is used for plotting,
-and `DataFrames` is used to store/print output tables.

@@ -1,10 +1,14 @@
 """
-    concordance(class::BitVector, var::Vector, tie=1e-6)
+    concordance(class, var, tie)
 
-Concordance calculation:
-`class` is a 2 level categorical target variable,
-`var` is a predictor,
-`tie` is a region where predictor values are considered as tied.
+Computes concordant, tied and discordant pairs.
+`class` can be either a BitVector or a 2 level categorical target variable in which case
+`true` is defined by the last value in sorted sequence.
+`var` is a Vector of predictor, same length as `class`,
+`tie` (optional) can be a number (default is 1e-6) that defines a tied region,
+or it can be a function that when called with a scalar value will return a tuple
+of lower bound and upper bound of a tied region,
+useful when you want to do percentage tied region for instance.
 
 Pair-wise comparison between class 1 with class 0 values are made as follows:
 - class 1 value > class 0 value is Concordant
@@ -19,7 +23,7 @@ Returns:
 - gini, 2C-1, also known as Somer's D, is (Concordant - Discordant) / Total comparisons
 
 Concordance calculation is the same as numeric integration of the ROC curve,
-but knowledge of concordant/tied/discordant is more informative than area under curve.
+but it allows for fuzzy tied regions which can be useful.
 
 Note:
 - Goodman-Kruskal Gamma is (Concordant - Discordant) / (Concordant + Discordant)
