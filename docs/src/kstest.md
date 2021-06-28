@@ -24,8 +24,8 @@ n100b = rand(Normal(100, 10), 1000)
 n120  = rand(Normal(120, 10), 1000)
 n140  = rand(Normal(140, 10), 1000)
 
-histogram(n100, nbins = 50, opacity= 0.3)
-histogram!(n100a, nbins = 50, opacity= 0.3, legend = nothing)
+histogram(n100a, nbins = 50, opacity= 0.3)
+histogram!(n100b, nbins = 50, opacity= 0.3, legend = nothing)
 png("kstest-1.png"); nothing # hide
 ```
 
@@ -87,7 +87,7 @@ png("kstest-2.png"); nothing    # hide
 
 ```@example kstest
 cls = [fill(0, length(n100a)); fill(1, length(n120))]
-values = [n100; n120]
+values = [n100a; n120]
 kstest(cls, values)
 ```
 
