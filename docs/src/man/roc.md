@@ -51,7 +51,7 @@ const x = rand(Uniform(-5, 5), 1_000_000)
 const logit = -3.0 .+ 0.5 .* x .+ rand(Normal(0, 0.1), length(x))
 const prob = @. 1.0 / (1.0 + exp(-logit))
 const target = rand(length(x)) .<= prob
-; # hide
+; # hide 
 ```
  
 Now compute roc:
@@ -90,8 +90,8 @@ mean(w1), mean(w2)
 Values +/- 1,000 are considered ties:
 
 ```@example roc
-cls = [fill(0, length(n100)); fill(1, length(n140))]
-values = [n100; n140]
+cls = [fill(0, length(w1)); fill(1, length(w2))]
+values = [w1; w2]
 concordance(cls, values, 1_000)
 ```
 
