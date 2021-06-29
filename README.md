@@ -74,3 +74,7 @@ Tables:
 - `cumliftable`, cumulative actual and predicted lift tables
 
 DataFrame tables are returned and can be further processed as desired.
+
+For full documentation see
+[![Stable](https://img.shields.io/badge/docs-stable-blue.svg)](https://DaymondLing.github.io/ROCKS.jl/dev)
+.

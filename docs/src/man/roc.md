@@ -73,7 +73,7 @@ roc(target, prob)
 `roc` is just a synonym for the `concordance` function.
 We can use it in a more general setting of comparing two distributions.
 
-```example roc
+```@example roc
 using Random
 using Distributions
 using StatsBase
@@ -104,3 +104,8 @@ pct(x) = 0.9*x, 1.1*x
 
 concordance(cls, values, pct)
 ```
+
+In these scenarios, concordance is a measure of how often does
+individual level comparisions agree with aggregate level comparisons. e.g.,
+if group B on average has more money than group A, when we do individual
+level comparisons, how often is the group level statement true, tied or false.

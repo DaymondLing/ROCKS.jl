@@ -113,7 +113,7 @@ histogram!(n140, nbins = 50, opacity= 0.3, legend = nothing)
 png("kstest-3.png"); nothing    # hide
 ```
 
-![](kstest-3.svg)
+![](kstest-3.png)
 
 ```@example kstest
 cls = [fill(0, length(n100)); fill(1, length(n140))]

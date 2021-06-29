@@ -9,12 +9,13 @@ document its performance, `bcdiag` allows us to do this easily.
 using ROCKS
 using Random
 using Distributions
-
+using BenchmarkTools
 Random.seed!(888)
 const x = rand(Uniform(-5, 5), 1_000_000)
 const logit = -3.0 .+ 0.5 .* x .+ rand(Normal(0, 0.1), length(x))
 const prob = @. 1.0 / (1.0 + exp(-logit))
 const target = rand(length(x)) .<= prob
+nothing # hide
 ```
 
 `kstest`:
@@ -28,7 +29,21 @@ kstest(target, prob)
 roc(target, prob)
 ```
 
+These functions are performant:
+
+```@example bcd
+@benchmark kstest($target, $prob)
+```
+
+```@example bcd
+@benchmark roc($target, $prob)
+```
+
 ## bcdiag
+
+In additional to numeric metrics, often
+we would like to have plots and tables as part of final model documentation.
+The `bcdiag` function allows easy generation of plots and tables.
 
 Running `bcdiag` prints a quick summary:
 
@@ -49,12 +64,12 @@ and class 0 (false positive rate) versus depth.
 
 ```@example bcd
 ksplot(mdiag)
-savefig("bcd-ksplot.svg"); nothing # hide
+png("bcd-ksplot.png"); nothing # hide
 ```
 
 It shows where the maximum separation of the two distributions occur.
 
-![](bcd-ksplot.svg)
+![](bcd-ksplot.png)
 
 ## rocplot
 
@@ -62,12 +77,12 @@ It shows where the maximum separation of the two distributions occur.
 
 ```@example bcd
 rocplot(mdiag)
-savefig("bcd-rocplot.svg"); nothing # hide
+png("bcd-rocplot.png"); nothing # hide
 ```
 
 A perfect model has auc of 1, a random model has auc of 0.5.
 
-![](bcd-rocplot.svg)
+![](bcd-rocplot.png)
 
 ## biasplot
 
@@ -84,10 +99,10 @@ This is also called the *calibration* graph.
 
 ```@example bcd
 biasplot(mdiag)
-savefig("bcd-biasplot.svg"); nothing # hide
+png("bcd-biasplot.png"); nothing # hide
 ```
 
-![](bcd-biasplot.svg)
+![](bcd-biasplot.png)
 
 An unbiased model would lie on the diagnonal, systemic shift off the diagonal
 represents over or under estimate of the true probability.
@@ -114,10 +129,10 @@ e.g., class 1 may be only 2% of the cases.
 
 ```@example bcd
 accuracyplot(mdiag)
-savefig("bcd-accuracyplot.svg"); nothing # hide
+png("bcd-accuracyplot.png"); nothing # hide
 ```
 
-![](bcd-accuracyplot.svg)
+![](bcd-accuracyplot.png)
 
 ## liftcurve
 
@@ -126,13 +141,13 @@ with baserate as 1.
 
 ```@example bcd
 liftcurve(mdiag)
-savefig("bcd-liftcurve.svg"); nothing # hide
+png("bcd-liftcurve.png"); nothing # hide
 ```
 
 We can easily see where the model is performing better than average,
 approximately the same as average, or below average.
 
-![](bcd-liftcurve.svg)
+![](bcd-liftcurve.png)
 
 ## cumliftcurve
 
@@ -141,15 +156,18 @@ of *cumulative* response rate from the top of the model.
 
 ```@example bcd
 cumliftcurve(mdiag)
-savefig("bcd-cumliftcurve.svg"); nothing # hide
+png("bcd-cumliftcurve.png"); nothing # hide
 ```
 
-![](bcd-cumliftcurve.svg)
+![](bcd-cumliftcurve.png)
+
+## Tables
 
 `bcdiag` uses 100 as the default number of groups, this is good for
-generating plots.
+generating plots above.
 
-For tables such as decile reports, run `bcdiag` with only 10 groups:
+For tables such as decile reports, we may want
+to run `bcdiag` with only 10 groups and then generate the tables:
 
 ```@example bcd
 mdiag10 = bcdiag(target, prob; groups = 10)
