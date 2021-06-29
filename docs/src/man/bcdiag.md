@@ -146,12 +146,21 @@ savefig("bcd-cumliftcurve.svg"); nothing # hide
 
 ![](bcd-cumliftcurve.svg)
 
+`bcdiag` uses 100 as the default number of groups, this is good for
+generating plots.
+
+For tables such as decile reports, run `bcdiag` with only 10 groups:
+
+```@example bcd
+mdiag10 = bcdiag(target, prob; groups = 10)
+```
+
 ## liftable
 
 `liftable` is the table from which `liftcurve` is plotted.
 
 ```@example bcd
-liftable(mdiag)
+liftable(mdiag10)
 ```
 
 ## cumliftable
@@ -159,5 +168,5 @@ liftable(mdiag)
 `cumliftable` is the *cumulative* version of `liftable`.
 
 ```@example bcd
-cumliftable(mdiag)
+cumliftable(mdiag10)
 ```
