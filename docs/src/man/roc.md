@@ -51,6 +51,7 @@ const x = rand(Uniform(-5, 5), 1_000_000)
 const logit = -3.0 .+ 0.5 .* x .+ rand(Normal(0, 0.1), length(x))
 const prob = @. 1.0 / (1.0 + exp(-logit))
 const target = rand(length(x)) .<= prob
+; # hide
 ```
 
 Now compute roc:
@@ -58,7 +59,6 @@ Now compute roc:
 ```@example roc
 roc(target, prob)
 ```
-
 
 `roc` returns results in a named tuple:
 
@@ -76,6 +76,7 @@ We can use it in a more general setting of comparing two distributions.
 ```example roc
 using Random
 using Distributions
+using StatsBase
 
 Random.seed!(123)
 w1 = rand(Weibull(1.3, 30_000), 100_000)

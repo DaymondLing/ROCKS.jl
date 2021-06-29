@@ -24,7 +24,8 @@ Random.seed!(123)
 n100 = rand(Normal(100, 10), 1000)
 n105 = rand(Normal(105, 10), 1000)
 n120  = rand(Normal(120, 10), 1000)
-n140  = rand(Normal(140, 10), 1000);
+n140  = rand(Normal(140, 10), 1000)
+; # hide
 ```
 
 ## Closely spaced distributions
@@ -109,7 +110,7 @@ Let's test on widely separately data:
 ```@example kstest
 histogram(n100, nbins = 50, opacity= 0.3)
 histogram!(n140, nbins = 50, opacity= 0.3, legend = nothing)
-savefig("kstest-3.svg"); nothing    # hide
+png("kstest-3.png"); nothing    # hide
 ```
 
 ![](kstest-3.svg)
