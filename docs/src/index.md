@@ -7,13 +7,13 @@ a binary classifier are:
 (Receiver Operating Characteristic)
 
 ```@raw html
-<img src="images/rocplot.png" width="400" />
+<img src="images/rocplot.png" width="500" />
 ```
 
 - KS-Statistic (Kolmogorov-Smirnov 2 sample CDF max separation)
 
 ```@raw html
-<img src="images/ksplot.png"/ width="400" />
+<img src="images/ksplot.png"/ width="500" />
 ```
 
 This package makes it easy to calculate ROC and KS, and produce

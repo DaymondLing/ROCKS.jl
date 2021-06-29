@@ -24,7 +24,7 @@ Random.seed!(123)
 n100 = rand(Normal(100, 10), 1000)
 n105 = rand(Normal(105, 10), 1000)
 n120  = rand(Normal(120, 10), 1000)
-n140  = rand(Normal(140, 10), 1000)
+n140  = rand(Normal(140, 10), 1000);
 ```
 
 ## Closely spaced distributions
@@ -47,8 +47,8 @@ function viewcdf(pl, v)
     title = "Empirical Cumluative Distribution", legend = nothing)
 end
 
-viewcdf(plot, n100a)
-viewcdf(plot!, n100b)
+viewcdf(plot, n100)
+viewcdf(plot!, n105)
 png("kstest-1cdf.png"); nothing # hide
 ```
 

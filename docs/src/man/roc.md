@@ -37,11 +37,28 @@ The mathematical proof can be found at
 and
 [Professor David J. Hand's article](https://pdfs.semanticscholar.org/1fcb/f15898db36990f651c1e5cdc0b405855de2c.pdf).
 
-```@example kstest
-cls = [fill(0, length(n100)); fill(1, length(n140))]
-values = [n100; n140]
-roc(cls, values)
+## Example
+
+Create data:
+
+```@example roc
+using ROCKS
+using Random
+using Distributions
+
+Random.seed!(888)
+const x = rand(Uniform(-5, 5), 1_000_000)
+const logit = -3.0 .+ 0.5 .* x .+ rand(Normal(0, 0.1), length(x))
+const prob = @. 1.0 / (1.0 + exp(-logit))
+const target = rand(length(x)) .<= prob
 ```
+
+Now compute roc:
+
+```@example roc
+roc(target, prob)
+```
+
 
 `roc` returns results in a named tuple:
 
@@ -50,3 +67,39 @@ roc(cls, values)
 - `disc`, number of discordant comparisons
 - `auc`, area under ROC curve, or just area under curve
 - `gini`, 2auc - 1
+
+## Concordance
+
+`roc` is just a synonym for the `concordance` function.
+We can use it in a more general setting of comparing two distributions.
+
+```example roc
+using Random
+using Distributions
+
+Random.seed!(123)
+w1 = rand(Weibull(1.3, 30_000), 100_000)
+w2 = rand(Weibull(1.3, 33_000), 100_000)
+
+mean(w1), mean(w2)
+```
+
+## Fixed width tied region
+
+Values +/- 1,000 are considered ties:
+
+```@example roc
+cls = [fill(0, length(n100)); fill(1, length(n140))]
+values = [n100; n140]
+concordance(cls, values, 1_000)
+```
+
+## Percentage width tied range
+
+Values within 10% are tied:
+
+```@example roc
+pct(x) = 0.9*x, 1.1*x
+
+concordance(cls, values, pct)
+```
