@@ -53,7 +53,7 @@ const prob = @. 1.0 / (1.0 + exp(-logit))
 const target = rand(length(x)) .<= prob
 ; # hide
 ```
-
+ 
 Now compute roc:
 
 ```@example roc
