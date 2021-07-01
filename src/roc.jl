@@ -69,20 +69,6 @@ function concordance(class::BitVector, var::Vector, tie = 1e-6)
     (conc = conc, tied = tied, disc = disc, auc = auc, gini = 2auc - 1)
 end
 
-function concordance(class::Vector, var::Vector, tie = 1e-6)
-    uc = sort!(unique(class))
-    length(uc) == 2 || throw(ArgumentError("class must be 2 levels"))
-
-    concordance(class .== uc[2], var, tie)
-end
-
-"""
-    concordance(class::BitVector, var::Vector, tie::Function)
-
-Concordance calculation with a function to define tied region.
-More generally flexible when comparing, e.g., income of two groups, where
-the tied region is not constant but is a percentage of the income for instance.
-"""
 function concordance(class::BitVector, var::Vector, tie::Function)
     n = length(class)
     n == length(var) || throw(ArgumentError("class and var should be the same length"))
@@ -122,11 +108,12 @@ function concordance(class::BitVector, var::Vector, tie::Function)
     (conc = conc, tied = tied, disc = disc, auc = auc, gini = 2auc - 1)
 end
 
-function concordance(class::Vector, var::Vector, tie::Function)
+function concordance(class::Vector, var::Vector, tie)
     uc = sort!(unique(class))
     length(uc) == 2 || throw(ArgumentError("class must be 2 levels"))
 
     concordance(class .== uc[2], var, tie)
 end
+
 
 roc = concordance                       # synonym

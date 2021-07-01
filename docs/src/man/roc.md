@@ -51,7 +51,7 @@ const x = rand(Uniform(-5, 5), 1_000_000)
 const logit = -3.0 .+ 0.5 .* x .+ rand(Normal(0, 0.1), length(x))
 const prob = @. 1.0 / (1.0 + exp(-logit))
 const target = rand(length(x)) .<= prob
-; # hide 
+nothing # hide
 ```
  
 Now compute roc:
@@ -70,7 +70,7 @@ roc(target, prob)
 
 ## Concordance
 
-`roc` is just a synonym for the `concordance` function.
+In this package, `roc` is just a synonym for the `concordance` function.
 We can use it in a more general setting of comparing two distributions.
 
 ```@example roc
@@ -92,20 +92,40 @@ Values +/- 1,000 are considered ties:
 ```@example roc
 cls = [fill(0, length(w1)); fill(1, length(w2))]
 values = [w1; w2]
-concordance(cls, values, 1_000)
+c = concordance(cls, values, 1_000)
 ```
+
+We can compute percentages as follows:
+
+```@example roc
+tot = c.conc + c.tied + c.disc
+println("Concordant %: ", round(c.conc/tot, digits=4),
+        "\nTied #:       ", round(c.tied/tot, digits=4),
+        "\nDiscordant %: ", round(c.disc/tot, digits=4))
+```
+
+We can interpret it as, if cls[2] on aggregate has higher value than cls[1],
+the statement is true concordant% of the time,
+the statement is neither true or false tied% of the time,
+the statement is false discordant% of the time.
+Whereas the simplistic global statement suggests it is true all the time,
+we now know the extent it is true and can argue that it is in fact
+false discordant% of the time and assess decisions made based
+on better insights.
 
 ## Percentage width tied range
 
-Values within 10% are tied:
+Rather than a fixed tied region, it may be appropriate to have variable
+tied region, e.g., when comparing income, it would be better to use
+a percentage rather than fixed amount.
+
+Here's an example where values within 10% are considered as tied:
 
 ```@example roc
 pct(x) = 0.9*x, 1.1*x
-
-concordance(cls, values, pct)
+c = concordance(cls, values, pct)
+tot = c.conc + c.tied + c.disc
+println("Concordant %: ", round(c.conc/tot, digits=4),
+        "\nTied #:       ", round(c.tied/tot, digits=4),
+        "\nDiscordant %: ", round(c.disc/tot, digits=4))
 ```
-
-In these scenarios, concordance is a measure of how often does
-individual level comparisions agree with aggregate level comparisons. e.g.,
-if group B on average has more money than group A, when we do individual
-level comparisons, how often is the group level statement true, tied or false.

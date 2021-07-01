@@ -25,7 +25,7 @@ n100 = rand(Normal(100, 10), 1000)
 n105 = rand(Normal(105, 10), 1000)
 n120  = rand(Normal(120, 10), 1000)
 n140  = rand(Normal(140, 10), 1000)
-; # hide
+nothing # hide
 ```
 
 ## Closely spaced distributions
