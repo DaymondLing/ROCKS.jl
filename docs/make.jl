@@ -16,7 +16,7 @@ makedocs(;
         "User's Guide" => [
             "KS Test" => "man/kstest.md",
             "ROC" => "man/roc.md",
-            "Plots" => "man/bcdiag.md",
+            "Plots and Tables" => "man/bcdiag.md",
         ],
         "Function Reference" => "Reference.md",
     ],

@@ -80,8 +80,8 @@ kstest(cls, values)
 
 ks of 0 means the distributions are indistinguishable,
 ks of 1 says the two distributions are complete separable.
-These two distributions have negligible separation since they are drawn from the
-same distribution.
+These two distributions have small separation since they are drawn from
+distributions with large overlap.
 
 ## Moderately separated distributions
 
