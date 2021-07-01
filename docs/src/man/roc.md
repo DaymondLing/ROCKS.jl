@@ -100,7 +100,7 @@ We can compute percentages as follows:
 ```@example roc
 tot = c.conc + c.tied + c.disc
 println("Concordant %: ", round(c.conc/tot, digits=4),
-        "\nTied #:       ", round(c.tied/tot, digits=4),
+        "\nTied       %: ", round(c.tied/tot, digits=4),
         "\nDiscordant %: ", round(c.disc/tot, digits=4))
 ```
 
@@ -126,6 +126,6 @@ pct(x) = 0.9*x, 1.1*x
 c = concordance(cls, values, pct)
 tot = c.conc + c.tied + c.disc
 println("Concordant %: ", round(c.conc/tot, digits=4),
-        "\nTied #:       ", round(c.tied/tot, digits=4),
+        "\nTied       %: ", round(c.tied/tot, digits=4),
         "\nDiscordant %: ", round(c.disc/tot, digits=4))
 ```

@@ -1,8 +1,7 @@
-# Binary Classifierr Diagnostics
+# Binary Classifier Diagnostics
 
 While `kstest` and `roc` provide diagnostic measures for comparing
-model performance, when there is a model of interest,
-it is likely that we need to produce many graphs and table to understand and
+model performance, we may want to graphs and tables to 
 document its performance, `bcdiag` allows us to do this easily.
 
 ```@example bcd
