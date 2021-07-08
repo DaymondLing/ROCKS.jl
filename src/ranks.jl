@@ -1,9 +1,9 @@
 """
     ranks(x; groups = 10, rank = tiedrank, rev = false)
 
-Return a variable which bins `x` into `groups` number of bins.
-The `rank` keyword allows different ranking method;
-use `rev = true` to reverse sort so that small bin number is large value of `x`.
+Return a variable which bins `x` into `groups` number of bins.\\
+The `rank` keyword allows different ranking method;\\
+use `rev = true` to reverse sort so that small bin number is large value of `x`.\\
 Missing values are assigned to group `missing`.
 
 Default values of `rank = tiedrank` and `rev = false` results

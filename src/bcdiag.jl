@@ -1,9 +1,8 @@
 """
     BCDiag
 
-A structure of diagnostic properties of a Binary Classifier.
-
-Facilitates summary plots and tables.
+A structure of diagnostic properties of a Binary Classifier,
+facilitates summary plots and tables.
 """
 struct BCDiag
     n::Int                  # Number of observations
@@ -62,11 +61,11 @@ end
 """
     bcdiag(target, pred; groups = 100, rev = true, tie = 1e-6)
 
-Perform diagnostics of a binary classifier.
-`target` is a 2 level categorical variable, `pred` is probability of class 1.
-`groups` is the number of bins to use for plotting/printing.
-`rev` = true orders `pred` from high to low.
-`tie` is the tolerance of `pred` where values are considered tied.
+Perform diagnostics of a binary classifier.\\
+`target` is a 2 level categorical variable, `pred` is probability of class 1.\\
+`groups` is the number of bins to use for plotting/printing.\\
+`rev` = true orders `pred` from high to low.\\
+`tie` is the tolerance of `pred` where values are considered tied.\\
 
 Returns a BCDiag struct which can be used for plotting or printing:
 - `biasplot` is calibration plot of `target` response rate vs. `pred` response rate
@@ -132,7 +131,7 @@ end
 """
     biasplot(x::BCDiag)
 
-returns a bias calibration plot of `x` - actual response vs. predicted response
+return bias calibration plot of `x` - actual response vs. predicted response
 """
 function biasplot(x::BCDiag)
     dmin = min(minimum(x.rrPrd), minimum(x.rrObs))
@@ -160,7 +159,7 @@ end
 """
     ksplot(x::BCDiag)
 
-returns a KS plot of `x` - CDF1 (True Positive) and CDF0 (False Positive) versus depth
+return KS plot of `x` - CDF1 (True Positive) and CDF0 (False Positive) versus depth
 """
 function ksplot(x::BCDiag)
     plt = plot(
@@ -236,7 +235,7 @@ end
 """
     rocplot(x::BCDiag)
 
-returns a ROC plot of `x` - CDF1 (True Positive) vs. CDF0 (False Positive)
+return ROC plot of `x` - CDF1 (True Positive) vs. CDF0 (False Positive)
 """
 function rocplot(x::BCDiag)
     plt = plot(
@@ -277,7 +276,7 @@ end
 """
     accuracyplot(x::BCDiag; util=[1, 0, 0, 1])
 
-Using `util` values for [TP, FN, FP, TN], produce accuracy plot and its [max, argmax, argdep].
+Using `util` values for [TP, FN, FP, TN], produce accuracy plot and its [max, argmax, argdep].\\
 Default `util` values of [1, 0, 0, 1] gives the standard accuracy value of (TP+TN)/N.
 """
 function accuracyplot(x::BCDiag; util=[1, 0, 0, 1])
@@ -329,7 +328,7 @@ end
 """
     liftcurve(x::BCDiag)
 
-returns a lift curve plot of `x` - actual and predicted versus depth
+return lift curve plot of `x` - actual and predicted versus depth
 """
 function liftcurve(x::BCDiag)
     plt = Plots.plot(
@@ -356,7 +355,7 @@ end
 """
     cumliftcurve(x::BCDiag)
 
-returns a cumulative lift curve plot of `x` - cumulative actual and predicted vs. depth
+return cumulative lift curve plot of `x` - cumulative actual and predicted vs. depth
 """
 function cumliftcurve(x::BCDiag)
     plt = Plots.plot(
@@ -383,7 +382,7 @@ end
 """
     liftable(x::BCDiag)
 
-returns a lift table of `x` as a DataFrame
+return lift table of `x` as a DataFrame
 """
 function liftable(x::BCDiag)
     out = DataFrame(
@@ -405,7 +404,7 @@ end
 """
     cumliftable(x::BCDiag)
 
-returns a cumulative lift table of `x` as a DataFrame
+return cumulative lift table of `x` as a DataFrame
 """
 function cumliftable(x::BCDiag)
     out = DataFrame(

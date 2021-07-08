@@ -55,8 +55,7 @@ We can then compute the following metrics:
 
 - AUC: (Concordant + 0.5 Tied) / (N1 * N0)
 - Gini: 2AUC - 1, or (Concordant - Discordant) / (N1 * N0)
-- Goodman-Kruskal Gamma: (Concordant - Discordant) / (Concordant + Discordant),
-no penalty for Tied
+- Goodman-Kruskal Gamma: (Concordant - Discordant) / (Concordant + Discordant), no penalty for Tied
 - Kendall's Tau: (Concordant - Discordant) / (0.5 * (N1+N0) * (N1+N0-1))
 
 When there are few ties, AUC is the percent of concordant pairs,
@@ -136,3 +135,4 @@ println("Concordant %: ", round(c.conc/tot, digits=4),
         "\nTied       %: ", round(c.tied/tot, digits=4),
         "\nDiscordant %: ", round(c.disc/tot, digits=4))
 ```
+

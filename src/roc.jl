@@ -1,10 +1,10 @@
 """
     concordance(class, var, tie)
 
-Computes concordant, tied and discordant pairs.
+Computes concordant, tied and discordant pairs.\\
 `class` can be either a BitVector or a 2 level categorical target variable in which case
-`true` is defined by the last value in sorted sequence.
-`var` is a Vector of predictor, same length as `class`,
+`true` is defined by the last value in sorted sequence.\\
+`var` is a Vector of predictor, same length as `class`,\\
 `tie` (optional) can be a number (default is 1e-6) that defines a tied region,
 or it can be a function that when called with a scalar value will return a tuple
 of lower bound and upper bound of a tied region,

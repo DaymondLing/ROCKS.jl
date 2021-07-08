@@ -1,7 +1,7 @@
 """
     kstest(class, var; rev = true)
 
-Calculate empirical 2 sample Kolmogorov-Smirnov statistic and its location.
+Calculate empirical 2 sample Kolmogorov-Smirnov statistic and its location.\\
 `class` is a 2 level categorical variable, `var` is the distribution to analyze.
 
 Returns:
