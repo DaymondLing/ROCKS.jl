@@ -108,7 +108,7 @@ function concordance(class::BitVector, var::Vector, tie::Function)
     (conc = conc, tied = tied, disc = disc, auc = auc, gini = 2auc - 1)
 end
 
-function concordance(class::Vector, var::Vector, tie)
+function concordance(class::Vector, var::Vector, tie = 1e-6)
     uc = sort!(unique(class))
     length(uc) == 2 || throw(ArgumentError("class must be 2 levels"))
 
